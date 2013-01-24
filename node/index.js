@@ -51,8 +51,10 @@ io.sockets.on('connection', function(socket) {
   // Client is requesting a log file
   socket.on('request log', function(data) {
 
+    console.log("Request received for " + data.file_path);
+
     // Spawn a tail process for the file in question
-    var tail = spawn('tail', ['-f', '-n 100', data.filePath]);
+    var tail = spawn('tail', ['-f', '-n 100', data.file_path]);
 
     // Hook up STDOUT for tail to send data back to client
     tail.stdout.on('data', function(data) {
@@ -67,7 +69,7 @@ io.sockets.on('connection', function(socket) {
     // Report exit back to client
     tail.on('exit', function(code) {
       socket.emit('log update', { data: 'Tail process exited with code: ' + code});
-      socket.close();
+      socket.disconnect();
     });
 
     // When the client disconnects, kill their tail process
