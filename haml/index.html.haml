@@ -17,11 +17,19 @@
     %script{src: '/js/tailor.js'}
 
   %body
-    %h1 Tailor
+    .navbar
+      .navbar-inner
+        .brand Tailor
 
-    .add-file
-      %input{type: 'text'}
-      %input.add-file.btn.btn-primary{type: 'button', value: 'Add File'}
+        %form.add-file-form.navbar-form.pull-right
+          .input-append
+            %input.add-file-path-name.span6{type: 'text', placeholder: '/path/to/log/file'}
+            %button.add-file.btn{type: 'submit'} Add File
 
-    .log-area
-      .log
+    #root.container-fluid
+      %section.row-fluid.log-tabs
+        %ul.span12.nav.nav-tabs
+          %li.none No logs loaded yet
+      .log-container
+        %section.row-fluid.log-area
+          .log.span12

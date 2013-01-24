@@ -1,18 +1,52 @@
-body {
-  padding: 20px;
+body, html {
+  height: 100%;
+}
+
+.navbar {
+  height: 40px;
+}
+
+section {
+  margin-bottom: 20px;
+}
+
+#root {
+  position: absolute;
+
+  top: 60px;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+}
+
+.log-tabs {
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+.log-container {
+  position: absolute;
+
+  top: 40px;
+  bottom: 0;
+  left: 20px;
+  right: 20px;
 }
 
 .log-area {
+  height: 100%;
+
   .log {
     background: #383933;
     border: 1px solid gray;
     color: white;
     font-family: Monaco;
     font-size: 12px;
-    height: 500px;
     overflow: scroll;
     padding: 5px;
     white-space: pre;
+
+    height: 100%;
 
     &.wrap {
       white-space: pre-wrap;

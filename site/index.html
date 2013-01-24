@@ -12,13 +12,28 @@
     <script src='/js/tailor.js'></script>
   </head>
   <body>
-    <h1>Tailor</h1>
-    <div class='add-file'>
-      <input type='text' />
-      <input class='add-file btn btn-primary' type='button' value='Add File' />
+    <div class='navbar'>
+      <div class='navbar-inner'>
+        <div class='brand'>Tailor</div>
+        <form class='add-file-form navbar-form pull-right'>
+          <div class='input-append'>
+            <input class='add-file-path-name span6' placeholder='/path/to/log/file' type='text' />
+            <button class='add-file btn' type='submit'>Add File</button>
+          </div>
+        </form>
+      </div>
     </div>
-    <div class='log-area'>
-      <div class='log'></div>
+    <div class='container-fluid' id='root'>
+      <section class='row-fluid log-tabs'>
+        <ul class='span12 nav nav-tabs'>
+          <li class='none'>No logs loaded yet</li>
+        </ul>
+      </section>
+      <div class='log-container'>
+        <section class='row-fluid log-area'>
+          <div class='log span12'></div>
+        </section>
+      </div>
     </div>
   </body>
 </html>
