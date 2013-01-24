@@ -5,6 +5,7 @@ var fs = require('fs');
 var io = require('socket.io').listen(app);
 var spawn = require('child_process').spawn;
 
+// Just serve up files from the /site directory
 function handler(request, response) {
   var pathname = url.parse(request.url).pathname;
 
@@ -47,28 +48,30 @@ function handler(request, response) {
 
 io.sockets.on('connection', function(socket) {
 
+  // Client is requesting a log file
   socket.on('request log', function(data) {
-    console.log("Received a log request for: " + data.file_path);
 
-    var tail = spawn('tail', ['-f', '-n 100', data.file_path]);
+    // Spawn a tail process for the file in question
+    var tail = spawn('tail', ['-f', '-n 100', data.filePath]);
 
+    // Hook up STDOUT for tail to send data back to client
     tail.stdout.on('data', function(data) {
       socket.emit('log update', { data: data.toString() });
     });
 
+    // Report errors back to client
     tail.stderr.on('data', function(data) {
-      socket.emit('log update', { data: 'error: ' + data});
-      console.log('error!');
+      socket.emit('log update', { data: 'ERROR: ' + data});
     });
 
+    // Report exit back to client
     tail.on('exit', function(code) {
-      socket.emit('log update', { data: 'child process exited with code ' + code});
-      console.log('child process exited with code ' + code);
+      socket.emit('log update', { data: 'Tail process exited with code: ' + code});
       socket.close();
     });
 
+    // When the client disconnects, kill their tail process
     socket.on('disconnect', function() {
-      console.log("Lost connection, killing spawned processes");
       tail.kill();
     });
   });
