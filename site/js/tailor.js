@@ -6,7 +6,7 @@ var LogFile = Backbone.Model.extend({
   initialize: function() {
     _.bindAll(this);
 
-    this.socket = io.connect('http://localhost:8080');
+    this.socket = io.connect('http://localhost:7065');
     this.socket.on("log update", this.handleLogUpdate);
 
     this.on({"change:filePath": this.requestLogFile});
