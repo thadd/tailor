@@ -50,19 +50,21 @@ io.sockets.on('connection', function(socket) {
   socket.on('request log', function(data) {
     console.log("Received a log request for: " + data.file_path);
 
-    var tail = spawn('tail', ['-f', data.file_path]);
+    var tail = spawn('tail', ['-f', '-n 100', data.file_path]);
 
     tail.stdout.on('data', function(data) {
       socket.emit('log update', { data: data.toString() });
     });
 
     tail.stderr.on('data', function(data) {
-      // console.log('error!');
+      socket.emit('log update', { data: 'error: ' + data});
+      console.log('error!');
     });
 
     tail.on('exit', function(code) {
-      // console.log('child process exited with code ' + code);
-      // socket.close();
+      socket.emit('log update', { data: 'child process exited with code ' + code});
+      console.log('child process exited with code ' + code);
+      socket.close();
     });
 
     socket.on('disconnect', function() {

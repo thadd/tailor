@@ -8,4 +8,8 @@ body {
   font-family: Monaco;
   font-size: 12px;
   height: 500px;
-  overflow: scroll; }
+  overflow: scroll;
+  padding: 5px;
+  white-space: pre; }
+  .log-area .log.wrap {
+    white-space: pre-wrap; }
