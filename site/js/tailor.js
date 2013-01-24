@@ -4,6 +4,7 @@ var LogFile = Backbone.Model.extend({
 
   initialize: function() {
     _.bindAll(this);
+
     this.socket = io.connect('http://localhost:8080');
     this.socket.on("log update", this.handleLogUpdate);
   },
@@ -19,34 +20,44 @@ var LogFile = Backbone.Model.extend({
   }
 });
 
-var entityMap = {
-  "&": "&amp;",
-  "<": "&lt;",
-  ">": "&gt;",
-  '"': '&quot;',
-  "'": '&#39;',
-  "/": '&#x2F;'
-};
+var LogFileView = Backbone.View.extend({
+  className: 'log',
 
-function escapeHtml(string) {
-  return String(string).replace(/[&<>"'\/]/g, function (s) {
-    return entityMap[s];
-  });
-}
+  initialize: function() {
+    _.bindAll(this);
+
+    this.listenTo(this.model, "change:mostRecentLogData", this.render);
+  },
+
+  render: function() {
+    var consoleOutput = new ConsoleOutput();
+    consoleOutput.content = this.escapeHtml(this.model.get('mostRecentLogData'));
+
+    $('.log-area .log').append(consoleOutput.toHtml()).scrollTop($('.log-area .log')[0].scrollHeight);
+  },
+
+  escapeHtml: function(string) {
+    var entityMap = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': '&quot;',
+      "'": '&#39;',
+      "/": '&#x2F;'
+    }
+
+    return String(string).replace(/[&<>"'\/]/g, function(s) {
+      return entityMap[s];
+    });
+  }
+});
 
 $(function() {
   $('.add-file input[type="button"]').click(function() {
     var file = new LogFile();
-    
+    var view = new LogFileView({model: file});
+
     file.requestLogFile( $('.add-file input[type="text"]').val() );
 
-    file.on('change:mostRecentLogData', function() {
-      console.log("Got a change");
-
-      var consoleOutput = new ConsoleOutput();
-      consoleOutput.content = escapeHtml(file.get('mostRecentLogData'));
-
-      $('.log-area .log').append(consoleOutput.toHtml()).scrollTop($('.log-area .log')[0].scrollHeight);
-    });
-  })
+  });
 });
