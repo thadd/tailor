@@ -1,0 +1,27 @@
+!!!
+%html
+  %head
+    %title Tailor
+
+    %link{href: '/vendor/bootstrap/css/bootstrap.min.css', rel: 'stylesheet'}
+    %link{href: '/stylesheets/application.css', rel: 'stylesheet'}
+
+    %script{src: '/socket.io/socket.io.js'}
+
+    %script{src: '/vendor/jquery.min.js'}
+    %script{src: '/vendor/jquery.colorizeConsoleOutput.js'}
+
+    %script{src: '/vendor/underscore-min.js'}
+    %script{src: '/vendor/backbone-min.js'}
+
+    %script{src: '/js/tailor.js'}
+
+  %body
+    %h1 Tailor
+
+    .add-file
+      %input{type: 'text'}
+      %input{type: 'button', value: 'Add File'}
+
+    .log-area
+      %pre.log

@@ -1,0 +1,20 @@
+body {
+  padding: 20px;
+}
+
+.log-area {
+  .log {
+    background: #383933;
+    border: 1px solid gray;
+    color: white;
+    font-family: Monaco;
+    font-size: 12px;
+    height: 500px;
+    overflow: scroll;
+    // white-space: nowrap;
+
+    &.wrap {
+      // white-space: normal;
+    }
+  }
+}
