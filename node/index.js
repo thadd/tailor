@@ -46,6 +46,7 @@ function handler(request, response) {
   });
 }
 
+// Set up the IO socket
 io.sockets.on('connection', function(socket) {
 
   // Client is requesting a log file
@@ -80,5 +81,6 @@ io.sockets.on('connection', function(socket) {
 
 });
 
+// Only listen on loopback for security
 app.listen(7065, "127.0.0.1");
 console.log("Server started on http://127.0.0.1:7065");
