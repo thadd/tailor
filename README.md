@@ -6,7 +6,7 @@ Tool for tailing log files and making the output easy to view and work with. Als
 Feature List
 ------------
 
-See issue #1.
+See issue [#1](https://github.com/thadd/tailor/issues/1).
 
 Usage
 -----
