@@ -16,9 +16,23 @@
 
     %script{src: '/js/tailor.js'}
 
+    %script{id: 'log-file-tab-none-template', type: 'text/template'}
+      %li.none No logs loaded yet
+
+    %script{id: 'log-output-area-none-template', type: 'text/template'}
+      %section.row-fluid.log-area.none
+        .log.span12
+          No logs loaded yet. Add the first log by entering the file path in the box on the upper right.
+
     %script{id: 'log-file-tab-template', type: 'text/template'}
-      %li.active
-        %a{href: '#<%= log_id %>'} <%= log_file_path %>
+      %li{class: '<%= log_id %>'}
+        %a{href: '#<%= log_id %>'}
+          %span.close &times;
+          <%= log_file_path %>
+
+    %script{id: 'log-output-area-template', type: 'text/template'}
+      %section.row-fluid.log-area{id: '<%= log_id %>'}
+        .log.span12
 
   %body
     .navbar
@@ -33,7 +47,4 @@
     #root.container-fluid
       %section.row-fluid.log-tabs
         %ul.span12.nav.nav-tabs
-          %li.none No logs loaded yet
       .log-container
-        %section.row-fluid.log-area
-          .log.span12

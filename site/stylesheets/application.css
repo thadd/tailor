@@ -17,6 +17,9 @@ section {
 .log-tabs {
   height: 30px;
   margin-bottom: 10px; }
+  .log-tabs .close {
+    float: left;
+    margin: -3px 8px 0 -8px; }
 
 .log-container {
   position: absolute;
@@ -39,3 +42,13 @@ section {
     height: 100%; }
     .log-area .log.wrap {
       white-space: pre-wrap; }
+  .log-area.none .log {
+    color: #888888;
+    font-family: Helvetica, sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 48px;
+    padding: 10% 20%;
+    overflow: visible;
+    text-align: center;
+    white-space: normal; }

@@ -74,11 +74,15 @@ var LogFileView = Backbone.View.extend({
 
     // If there were no logs loaded, remove the blank slate tab
     $('.log-tabs .none').remove();
+    $('.log-container .none').remove();
 
-    // Add the new log tab
+    // Add the new log tab and make it active
     $('.log-tabs ul').append(_.template($('#log-file-tab-template').html(), template_parameters));
+    $('.log-tabs li').removeClass('active');
+    $('.log-tabs .' + this.logId).addClass('active');
 
-    // TODO: Add actual log views here
+    // Add the log output area
+    $('.log-container').append(_.template($('#log-output-area-template').html(), template_parameters));
   },
 
   // New data appended to the log
@@ -88,18 +92,25 @@ var LogFileView = Backbone.View.extend({
     consoleOutput.content = _.escape(this.model.get('mostRecentLogData'));
 
     // Append the new data to the log output field
-    // TODO: Handle multiple output fields
-    $('.log-area .log').append(consoleOutput.toHtml()).scrollTop($('.log-area .log')[0].scrollHeight);
+    $('#' + this.logId + ' .log').append(consoleOutput.toHtml()).scrollTop($('#' + this.logId + ' .log')[0].scrollHeight);
   }
 });
 
 // TODO: Handle multiple logs
 var LogSetView = Backbone.View.extend({
+  // Set up the blank slates for the log tabs and output area
+  addBlankSlates: function() {
+    $('.log-tabs ul').append(_.template($('#log-file-tab-none-template').html()));
+    $('.log-container').append(_.template($('#log-output-area-none-template').html()));
+  }
 });
 
 $(function() {
   // Focus on the log path on initial page load
   $('.add-file-path-name').focus();
+
+  // Set up the blank slates
+  (new LogSetView()).addBlankSlates();
 
   // Add log file action triggered
   $('.add-file-form').submit(function(event) {
@@ -108,7 +119,7 @@ $(function() {
     var file = new LogFile();
     var view = new LogFileView({model: file});
 
-    file.set({filePath: $('.add-file-path-name').val()})
+    file.set({filePath: $('.add-file-path-name').val().trim()})
 
     // Reset the input for the next one
     $('.add-file-path-name').val('');
