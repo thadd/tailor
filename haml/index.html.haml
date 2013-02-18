@@ -16,6 +16,10 @@
 
     %script{src: '/js/tailor.js'}
 
+    %script{id: 'log-file-tab-template', type: 'text/template'}
+      %li.active
+        %a{href: '#<%= log_id %>'} <%= log_file_path %>
+
   %body
     .navbar
       .navbar-inner

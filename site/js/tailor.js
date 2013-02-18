@@ -24,6 +24,10 @@ var LogFile = Backbone.Model.extend({
   }
 });
 
+var LogSet = Backbone.Collection.extend({
+    model: LogFile
+});
+
 var LogFileView = Backbone.View.extend({
   className: 'log',
   logId: '',
@@ -38,10 +42,13 @@ var LogFileView = Backbone.View.extend({
   renderNewLogFile: function() {
     this.logId = _.uniqueId('log_');
 
+    var template_parameters = {
+      log_id: this.logId,
+      log_file_path: this.model.get('filePath')
+    }
+
     $('.log-tabs .none').remove();
-    $('.log-tabs ul').append("<li class='active'><a href='#" +
-      this.logId + "'>" +
-      this.model.get('filePath') + "</a></li>");
+    $('.log-tabs ul').append(_.template($('#log-file-tab-template').html(), template_parameters));
   },
 
   render: function() {
@@ -50,6 +57,10 @@ var LogFileView = Backbone.View.extend({
 
     $('.log-area .log').append(consoleOutput.toHtml()).scrollTop($('.log-area .log')[0].scrollHeight);
   }
+});
+
+var LogSetView = Backbone.View.extend({
+
 });
 
 $(function() {
