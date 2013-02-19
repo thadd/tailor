@@ -29,19 +29,24 @@ section {
   right: 20px; }
 
 .log-area {
+  display: none;
   height: 100%; }
-  .log-area .log {
-    background: #383933;
-    border: 1px solid gray;
-    color: white;
-    font-family: Monaco;
-    font-size: 12px;
-    overflow: scroll;
-    padding: 5px;
-    white-space: pre;
+  .log-area.active {
+    display: block; }
+  .log-area .log-inner {
     height: 100%; }
-    .log-area .log.wrap {
-      white-space: pre-wrap; }
+    .log-area .log-inner .log {
+      background: #383933;
+      border: 1px solid gray;
+      color: white;
+      font-family: Monaco;
+      font-size: 12px;
+      overflow: scroll;
+      padding: 5px;
+      white-space: pre;
+      height: 100%; }
+      .log-area .log-inner .log.wrap {
+        white-space: pre-wrap; }
   .log-area.none .log {
     color: #888888;
     font-family: Helvetica, sans-serif;
