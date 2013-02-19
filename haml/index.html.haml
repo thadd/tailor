@@ -33,7 +33,11 @@
 
     %script{id: 'log-output-area-template', type: 'text/template'}
       .log-inner.row-fluid
-        .log.span12
+        .log.span10
+        .actions.span2
+          .form-inline
+            %label.checkbox.wrap-lines
+              %input{type: 'checkbox', name: 'wrap_<%= log_id %>'} Wrap lines
 
   %body
     .navbar
