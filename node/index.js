@@ -56,21 +56,21 @@ io.sockets.on('connection', function(socket) {
 
     // Spawn a tail process for the file in question
     var tail = spawn('tail', ['-f', '-n 100', data.file_path]);
+    var fp = data.file_path;
 
     // Hook up STDOUT for tail to send data back to client
     tail.stdout.on('data', function(data) {
-      socket.emit('log update', { data: data.toString() });
+      socket.emit('log update', { data: data.toString(), file: fp });
     });
 
     // Report errors back to client
     tail.stderr.on('data', function(data) {
-      socket.emit('log update', { data: 'ERROR: ' + data});
+      socket.emit('log update', { data: 'ERROR: ' + data, file: fp});
     });
 
     // Report exit back to client
     tail.on('exit', function(code) {
-      socket.emit('log update', { data: 'Tail process exited with code: ' + code});
-      socket.disconnect();
+      socket.emit('log update', { data: 'Tail process exited with code: ' + code, file: fp});
     });
 
     // When the client disconnects, kill their tail process
