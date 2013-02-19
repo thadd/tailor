@@ -11,14 +11,7 @@
     <script src='/vendor/backbone-min.js'></script>
     <script src='/js/tailor.js'></script>
     <script id='log-file-tab-none-template' type='text/template'>
-      <li class='none'>No logs loaded yet</li>
-    </script>
-    <script id='log-output-area-none-template' type='text/template'>
-      <section class='row-fluid log-area none'>
-        <div class='log span12'>
-          No logs loaded yet. Add the first log by entering the file path in the box on the upper right.
-        </div>
-      </section>
+      <li class='none active'>No logs loaded yet</li>
     </script>
     <script id='log-file-tab-template' type='text/template'>
       <li class='<%= log_id %>'>
@@ -28,10 +21,19 @@
         </a>
       </li>
     </script>
-    <script id='log-output-area-template' type='text/template'>
-      <section class='row-fluid log-area' id='<%= log_id %>'>
-        <div class='log span12'></div>
+    <script id='log-output-area-none-template' type='text/template'>
+      <section class='log-area none active'>
+        <div class='log-inner row-fluid'>
+          <div class='log span12'>
+            No logs loaded yet. Add the first log by entering the file path in the box on the upper right.
+          </div>
+        </div>
       </section>
+    </script>
+    <script id='log-output-area-template' type='text/template'>
+      <div class='log-inner row-fluid'>
+        <div class='log span12'></div>
+      </div>
     </script>
   </head>
   <body>
@@ -47,10 +49,12 @@
       </div>
     </div>
     <div class='container-fluid' id='root'>
-      <section class='row-fluid log-tabs'>
-        <ul class='span12 nav nav-tabs'></ul>
-      </section>
-      <div class='log-container'></div>
+      <div id='logs'>
+        <section class='row-fluid log-tabs'>
+          <ul class='span12 nav nav-tabs'></ul>
+        </section>
+        <div class='log-container'></div>
+      </div>
     </div>
   </body>
 </html>
