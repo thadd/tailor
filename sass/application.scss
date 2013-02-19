@@ -61,9 +61,17 @@ section {
 
       height: 100%;
 
+
       &.wrap {
         white-space: pre-wrap;
+        word-break: break-all;
       }
+    }
+
+    .actions {
+      height: 100%;
+      padding-top: 10px;
+      text-align: left;
     }
   }
 

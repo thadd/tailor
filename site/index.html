@@ -32,7 +32,14 @@
     </script>
     <script id='log-output-area-template' type='text/template'>
       <div class='log-inner row-fluid'>
-        <div class='log span12'></div>
+        <div class='log span10'></div>
+        <div class='actions span2'>
+          <div class='form-inline'>
+            <label class='checkbox wrap-lines'>
+              <input name='wrap_<%= log_id %>' type='checkbox'>Wrap lines</input>
+            </label>
+          </div>
+        </div>
       </div>
     </script>
   </head>
