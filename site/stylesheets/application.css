@@ -46,7 +46,12 @@ section {
       white-space: pre;
       height: 100%; }
       .log-area .log-inner .log.wrap {
-        white-space: pre-wrap; }
+        white-space: pre-wrap;
+        word-break: break-all; }
+    .log-area .log-inner .actions {
+      height: 100%;
+      padding-top: 10px;
+      text-align: left; }
   .log-area.none .log {
     color: #888888;
     font-family: Helvetica, sans-serif;

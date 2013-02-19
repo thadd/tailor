@@ -119,11 +119,13 @@ $(function() {
 
     // Create the log area
     render: function() {      
+      var logId = this.model.get('domId');
+
       // Set this view's ID to match the domId on the log
-      this.el.id = this.model.get('domId');
+      this.el.id = logId;
 
       // Fill the view with the template contents
-      $(this.el).html(this.template());
+      $(this.el).html(this.template({log_id: logId}));
 
       return this;
     },
@@ -165,7 +167,8 @@ $(function() {
 
     events: {
       'click .log-tabs li a .close': 'closeTab',
-      'click .log-tabs li a'       : 'activateTab'
+      'click .log-tabs li a'       : 'activateTab',
+      'change .wrap-lines input'   : 'toggleWrap'
     },
 
     initialize: function() {
@@ -309,6 +312,17 @@ $(function() {
 
       // Don't let the link get the click event
       event.stopPropagation();
+    },
+
+    toggleWrap: function(event) {
+      var logId = $(event.target).attr('name').replace(/^wrap_/, '#');
+      var wrapped = $(event.target).is(":checked");
+
+      if (wrapped) {
+        $(logId + " .log").addClass('wrap');
+      } else {
+        $(logId + " .log").removeClass('wrap');
+      }
     }
   });
 
