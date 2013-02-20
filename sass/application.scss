@@ -57,14 +57,28 @@ section {
       font-size: 12px;
       overflow: scroll;
       padding: 5px;
-      white-space: pre;
 
       height: 100%;
 
+      p {
+        margin: 0;
+        white-space: pre;
+
+        &:after {
+          content: ' ';
+        }
+      }
 
       &.wrap {
-        white-space: pre-wrap;
-        word-break: break-all;
+        p {
+          color: #aaaaaa;
+          white-space: pre-wrap;
+          word-break: break-all;
+
+          &:first-line {
+            color: white;
+          }
+        }
       }
     }
 

@@ -137,8 +137,10 @@ $(function() {
       var consoleOutput = new ConsoleOutput();
       consoleOutput.content = _.escape(this.model.get('mostRecentLogData'));
 
+      output = "<p>" + consoleOutput.toHtml().split('\n').join('</p>\n<p>') + "</p>"
+
       // Append the new data to the log output field
-      $(this.el).find('.log').append(consoleOutput.toHtml()).scrollTop($(this.el).find('.log')[0].scrollHeight);
+      $(this.el).find('.log').append(output).scrollTop($(this.el).find('.log')[0].scrollHeight);
 
       return this;
     },

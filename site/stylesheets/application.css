@@ -43,11 +43,18 @@ section {
       font-size: 12px;
       overflow: scroll;
       padding: 5px;
-      white-space: pre;
       height: 100%; }
-      .log-area .log-inner .log.wrap {
+      .log-area .log-inner .log p {
+        margin: 0;
+        white-space: pre; }
+        .log-area .log-inner .log p:after {
+          content: ' '; }
+      .log-area .log-inner .log.wrap p {
+        color: #aaaaaa;
         white-space: pre-wrap;
         word-break: break-all; }
+        .log-area .log-inner .log.wrap p:first-line {
+          color: white; }
     .log-area .log-inner .actions {
       height: 100%;
       padding-top: 10px;
