@@ -34,7 +34,24 @@
       <div class='log-inner row-fluid'>
         <div class='log span10'></div>
         <div class='actions span2'>
-          <div class='form-inline'>
+          <div class='search'>
+            <div class='search-term'>
+              <input class='input-block-level search-query' placeholder='Search' type='text' />
+              <div class='hint clear-search'>
+                <a href='#'>Clear</a>
+              </div>
+            </div>
+            <div class='search-type'>
+              <label class='checkbox inline'>
+                <input checked='checked' id='highlight_search' name='search_type' type='checkbox'>Highlight</input>
+              </label>
+              <label class='checkbox inline'>
+                <input id='filter_search' name='search_type' type='checkbox'>Filter</input>
+              </label>
+            </div>
+          </div>
+          <hr class='divider' />
+          <div class='wrap-option'>
             <label class='checkbox wrap-lines'>
               <input name='wrap_<%= log_id %>' type='checkbox'>Wrap lines</input>
             </label>

@@ -59,6 +59,11 @@ section {
       height: 100%;
       padding-top: 10px;
       text-align: left; }
+      .log-area .log-inner .actions > div {
+        margin-bottom: 10px; }
+      .log-area .log-inner .actions .search-term .clear-search {
+        font-size: 12px;
+        text-align: right; }
   .log-area.none .log {
     color: #888888;
     font-family: Helvetica, sans-serif;

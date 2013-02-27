@@ -35,7 +35,21 @@
       .log-inner.row-fluid
         .log.span10
         .actions.span2
-          .form-inline
+          .search
+            .search-term
+              %input.input-block-level.search-query{type: 'text', placeholder: 'Search'}
+              .hint.clear-search
+                %a{href: '#'} Clear
+
+            .search-type
+              %label.checkbox.inline
+                %input{type: 'checkbox', name: 'search_type', id: 'highlight_search', checked: true} Highlight
+              %label.checkbox.inline
+                %input{type: 'checkbox', name: 'search_type', id: 'filter_search', checked: false} Filter
+
+          %hr.divider
+
+          .wrap-option
             %label.checkbox.wrap-lines
               %input{type: 'checkbox', name: 'wrap_<%= log_id %>'} Wrap lines
 
