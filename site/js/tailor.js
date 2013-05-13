@@ -135,9 +135,21 @@ $(function() {
 
       // Add the most recent data, but process it so that ANSI colors get handled properly
       var consoleOutput = new ConsoleOutput();
-      consoleOutput.content = _.escape(this.model.get('mostRecentLogData'));
+      consoleOutput.content = _.escape(this.model.get('mostRecentLogData'))
 
-      output = "<p>" + consoleOutput.toHtml().split('\n').join('</p>\n<p>') + "</p>"
+      var output = "";
+
+      splitOnLines = _.escape(this.model.get('mostRecentLogData')).split(/\n/);
+
+      // Wrap all but the last line
+      for (var i=0; i < splitOnLines.length-1; i++) {
+        output = output + "\n" + "<p>" + splitOnLines[i] + "</p>";
+      }
+
+      // See if the last line has anything on it
+      if (splitOnLines[splitOnLines.length-1].length > 0) {
+        output = output + "\n" + "<p>" + splitOnLines[splitOnLines.length-1] + "</p>";
+      }
 
       // Append the new data to the log output field
       $(this.el).find('.log').append(output).scrollTop($(this.el).find('.log')[0].scrollHeight);
@@ -325,6 +337,8 @@ $(function() {
       } else {
         $(logId + " .log").removeClass('wrap');
       }
+
+      $(this.el).find('.log').scrollTop($(this.el).find('.log')[0].scrollHeight);
     }
   });
 
