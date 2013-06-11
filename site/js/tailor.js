@@ -151,8 +151,10 @@ $(function() {
         output = output + "\n" + "<p>" + splitOnLines[splitOnLines.length-1] + "</p>";
       }
 
+      consoleOutput.content = output;
+
       // Append the new data to the log output field
-      $(this.el).find('.log').append(output).scrollTop($(this.el).find('.log')[0].scrollHeight);
+      $(this.el).find('.log').append(consoleOutput.toHtml().replace(/<p>\s*(<\/p>\s*<p>){2,}/g, '<p></p><p>')).scrollTop($(this.el).find('.log')[0].scrollHeight);
 
       return this;
     },
